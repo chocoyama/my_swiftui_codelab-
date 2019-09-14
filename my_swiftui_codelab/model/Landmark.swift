@@ -1,10 +1,9 @@
-//
-//  Landmark.swift
-//  my_swiftui_codelab
-//
-//  Created by Takuya Yokoyama on 2019/09/14.
-//  Copyright © 2019 chocoyama. All rights reserved.
-//
+/*
+See LICENSE folder for this sample’s licensing information.
+
+Abstract:
+The model for an individual landmark.
+*/
 
 import SwiftUI
 import CoreLocation
@@ -24,6 +23,15 @@ struct Landmark: Hashable, Codable, Identifiable {
         CLLocationCoordinate2D(
             latitude: coordinates.latitude,
             longitude: coordinates.longitude)
+    }
+    
+    var featureImage: Image? {
+        guard isFeatured else { return nil }
+        
+        return Image(
+            ImageStore.loadImage(name: "\(imageName)_feature"),
+            scale: 2,
+            label: Text(verbatim: name))
     }
 
     enum Category: String, CaseIterable, Codable, Hashable {
